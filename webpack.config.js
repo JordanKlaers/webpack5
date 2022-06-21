@@ -17,11 +17,35 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.(s[ac]ss$|css$)/i,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							// Prefer `dart-sass`
+							implementation: require("sass"),
+							sourceMap: true
+						},
+					},
+				],
+			},
+			{
+				test: /\.js$/,
+				loader: "babel-loader",
+			},
+			{
 				test: /\.vue$/,
 				loader: 'vue-loader'
 			},
 			{
-				test: /\.(jpe?g|png|gif|svg)$/i, 
+				test: /\.(jpe?g|png|gif|svg)$/i,
 				loader: "file-loader"
 			}
 		]
